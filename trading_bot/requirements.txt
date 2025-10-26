@@ -1,0 +1,7 @@
+fyers-apiv3
+pandas
+numpy
+websocket-client
+requests
+streamlit
+stocktrends
