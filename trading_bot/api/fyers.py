@@ -139,6 +139,15 @@ class FyersAPI:
             return None
         return self.fyers.holdings()
 
+    def exit_positions(self, data=None):
+        """
+        Exits all open positions.
+        """
+        if not self.fyers:
+            print("Access token not set. Please authenticate first.")
+            return None
+        return self.fyers.exit_positions(data)
+
 
 if __name__ == '__main__':
     # Example usage

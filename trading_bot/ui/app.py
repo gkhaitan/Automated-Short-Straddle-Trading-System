@@ -32,17 +32,19 @@ def main():
     st.sidebar.header("Configuration")
     index = st.sidebar.selectbox("Select Index", ["NIFTY", "SENSEX"])
 
-    # In a real app, you'd handle Fyers authentication here.
-    # For this example, we'll assume the API is authenticated.
-    # fyers_api = FyersAPI()
-    # if 'access_token' not in st.session_state:
-    #     auth_code = st.text_input("Enter Fyers Auth Code")
-    #     if st.button("Generate Token"):
-    #         fyers_api.set_access_token(auth_code)
-    #         st.session_state.access_token = fyers_api.fyers.token
-    #         st.success("Access Token Generated!")
+    fyers_api = FyersAPI()
+    if 'access_token' not in st.session_state:
+        auth_code = st.text_input("Enter Fyers Auth Code")
+        if st.button("Generate Token"):
+            try:
+                fyers_api.set_access_token(auth_code)
+                st.session_state.access_token = fyers_api.fyers.token
+                st.success("Access Token Generated!")
+                st.rerun()
+            except Exception as e:
+                st.error(f"Failed to generate token: {e}")
 
-    if st.button("Start Auto-Trading"):
+    if st.button("Start Auto-Trading") and 'access_token' in st.session_state:
         st.info("Starting the automated trading system...")
 
         log_placeholder = st.empty()
